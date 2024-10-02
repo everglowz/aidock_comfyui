@@ -12,7 +12,8 @@ APT_PACKAGES=(
 )
 # Packages are installed after nodes so we can fix them...
 PIP_PACKAGES=(
-    "opencv-python==4.7.0.72"
+    "opencv-python==4.10.0.84"
+    "opencv-contrib-python==4.10.0.84"
 )
 
 NODES=(
@@ -148,6 +149,9 @@ function build_extra_get_nodes() {
             if [[ -e $requirements ]]; then
                 "$COMFYUI_VENV_PIP" install --no-cache-dir \
                     -r "${requirements}"
+            fi
+            if [[ ${repo} =~ ComfyUI\-Impact\-Pack ]]; then
+                "$COMFYUI_VENV_PYTHON" "${path}/install.py"
             fi
         fi
     done
